@@ -34,15 +34,14 @@ import PostTweet from './PostTweet.vue';
                 tweets: []
             }
         },
-        components: [
-            PostTweet
-        ],
+        components: {
+            'post-tweet': PostTweet
+        },
         mounted() {
-            axios.get('/tweets')
-            .then(function (response) {
-                // handle success
-                this.tweets = response.body
-            })
+            const serviceURL = "http://laravelauthenticationpassport.test/tweets";
+            axios.get(serviceURL).then(response => {
+                this.tweets = response.data;
+            });
         }
     }
 </script>
