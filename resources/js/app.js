@@ -7,17 +7,19 @@
 
 require('./bootstrap');
 
-window.Vue = require('vue');
-import VueResource from 'vue-resource';
-
-Vue.use(VueResource);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
+$.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  
 Vue.component('timeline', require('./components/Timeline.vue'));
+Vue.component('post-tweet', require('./components/PostTweet.vue'));
 
 const app = new Vue({
     el: '#app'

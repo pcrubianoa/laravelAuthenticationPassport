@@ -5,7 +5,9 @@
                 <div class="card card-default">
                     <div class="card-header">Timeline</div>
 
+                    
                     <div class="card-body">
+                    <post-tweet :tweets="tweets"></post-tweet>
                         <div class="media" v-for="tweet in tweets" v-bind:key="tweet.id">
                             <div class="media-left mr-3">
                                 <a href="#">
@@ -25,14 +27,20 @@
 </template>
 
 <script>
+import PostTweet from './PostTweet.vue';
     export default {
         data(){
             return {
                 tweets: []
             }
         },
+        components: [
+            PostTweet
+        ],
         mounted() {
-            this.$http.get('/tweets').then((response) => {
+            axios.get('/tweets')
+            .then(function (response) {
+                // handle success
                 this.tweets = response.body
             })
         }
